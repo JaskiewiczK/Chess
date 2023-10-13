@@ -38,23 +38,40 @@ public abstract class Piece {
         return null;
     }
     protected static boolean isKingUnderAttack(int fromPosition, int toPosition, boolean whiteColor, Chessboard chessboard){
+
         Chessboard newChessboard = Chessboard.deepCopyChessboard(chessboard);
+        System.out.println("stan na kopie");
+        System.out.println(newChessboard.whitePlayer.pieceMap);
+        System.out.println("-a-a-a-a-a--a-a-a-a-a--a-a-a-");
+        System.out.println(chessboard.whitePlayer.pieceMap);
         boolean isKingUnderAttackFlag = false;
 
         if (whiteColor) {
-            newChessboard.whitePlayer.pieceMap.put(toPosition, newChessboard.whitePlayer.pieceMap.get(fromPosition));
-            newChessboard.whitePlayer.pieceMap.get(toPosition).updatePosition(toPosition);
+
+
+            Piece originalPiece = newChessboard.whitePlayer.pieceMap.get(fromPosition);
+            Piece newPiece = Piece.createNewPiece(toPosition, true, originalPiece.getType());
+
+            newChessboard.whitePlayer.pieceMap.put(toPosition, newPiece);
+
+
             newChessboard.whitePlayer.pieceMap.remove(fromPosition);
             newChessboard.blackPlayer.pieceMap.remove(toPosition);
+
+
 
             if(ChessboardPanel.isKingTileUnderAttack(true, newChessboard)){
                 isKingUnderAttackFlag = true;
             }
 
         } else {
-            newChessboard.blackPlayer.pieceMap.put(toPosition, newChessboard.blackPlayer.pieceMap.get(fromPosition));
-            newChessboard.blackPlayer.pieceMap.get(toPosition).updatePosition(toPosition);
+
+            Piece originalPiece = newChessboard.blackPlayer.pieceMap.get(fromPosition);
+            Piece newPiece = Piece.createNewPiece(toPosition, false, originalPiece.getType());
+
+            newChessboard.blackPlayer.pieceMap.put(toPosition, newPiece);
             newChessboard.blackPlayer.pieceMap.remove(fromPosition);
+
             newChessboard.whitePlayer.pieceMap.remove(toPosition);
 
             if(ChessboardPanel.isKingTileUnderAttack(false, newChessboard)){

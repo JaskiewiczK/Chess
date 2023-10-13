@@ -19,9 +19,9 @@ public class Bishop extends Piece{
         int tempX = X-1;
         int tempY = Y-1;
         if(this.whiteColor){
-            while(tempX>-1 && tempY>-1 && !(ChessboardPanel.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
+            while(tempX>-1 && tempY>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
-                if(ChessboardPanel.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
+                if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
                     break;
                 }
                 --tempX;
@@ -29,9 +29,9 @@ public class Bishop extends Piece{
             }
             tempX=X-1;
             tempY=Y+1;
-            while(tempX>-1 && tempY<8 && !(ChessboardPanel.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
+            while(tempX>-1 && tempY<8 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
-                if(ChessboardPanel.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
+                if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
                     break;
                 }
                 --tempX;
@@ -39,9 +39,9 @@ public class Bishop extends Piece{
             }
             tempX=X+1;
             tempY=Y-1;
-            while(tempX<8 && tempY>-1 && !(ChessboardPanel.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
+            while(tempX<8 && tempY>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
-                if(ChessboardPanel.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
+                if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
                     break;
                 }
                 ++tempX;
@@ -49,18 +49,18 @@ public class Bishop extends Piece{
             }
             tempX=X+1;
             tempY=Y+1;
-            while(tempX<8 && tempY<8 && !(ChessboardPanel.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
+            while(tempX<8 && tempY<8 && !( chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
-                if(ChessboardPanel.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
+                if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
                     break;
                 }
                 ++tempX;
                 ++tempY;
             }
         }else{
-            while(tempX>-1 && tempY>-1 && !(ChessboardPanel.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
+            while(tempX>-1 && tempY>-1 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
-                if(ChessboardPanel.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
+                if(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
                     break;
                 }
                 --tempX;
@@ -68,9 +68,9 @@ public class Bishop extends Piece{
             }
             tempX=X-1;
             tempY=Y+1;
-            while(tempX>-1 && tempY<8 && !(ChessboardPanel.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
+            while(tempX>-1 && tempY<8 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
-                if(ChessboardPanel.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
+                if(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
                     break;
                 }
                 --tempX;
@@ -78,9 +78,9 @@ public class Bishop extends Piece{
             }
             tempX=X+1;
             tempY=Y-1;
-            while(tempX<8 && tempY>-1 && !(ChessboardPanel.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
+            while(tempX<8 && tempY>-1 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
-                if(ChessboardPanel.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
+                if(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
                     break;
                 }
                 ++tempX;
@@ -88,9 +88,9 @@ public class Bishop extends Piece{
             }
             tempX=X+1;
             tempY=Y+1;
-            while(tempX<8 && tempY<8 && !(ChessboardPanel.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
+            while(tempX<8 && tempY<8 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
-                if(ChessboardPanel.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
+                if(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
                     break;
                 }
                 ++tempX;
@@ -107,6 +107,10 @@ public class Bishop extends Piece{
 
     @Override
     public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
+        ArrayList<Integer> arrayList = getLegalMoves(chessboard);
+        if(arrayList.contains(position)){
+            return true;
+        }
         return false;
     }
 }

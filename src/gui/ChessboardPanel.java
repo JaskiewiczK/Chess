@@ -57,7 +57,6 @@ public class ChessboardPanel extends JPanel implements MouseListener {
 
         this.setBackground(new Color(153, 255, 187));
         this.setPreferredSize(new Dimension(panelSize, panelSize));
-        //addMouseListener(this);
         try {
             legalMoveCircle = ImageIO.read(getClass().getResource("/images/legalMoveCircle.png"));
             blackPawnImage = ImageIO.read(getClass().getResource("/images/blackP.png"));
@@ -116,12 +115,10 @@ public class ChessboardPanel extends JPanel implements MouseListener {
                 g.fillRect(OFFSET + x * TILESIZE, OFFSET + y * TILESIZE, TILESIZE, TILESIZE);
             }
         }
-        System.out.println("hash map " + chessboard.whitePlayer.pieceMap);
         chessboard.whitePlayer.pieceMap.forEach((key, value) -> paintWhitePieces(g2D, value));
         chessboard.blackPlayer.pieceMap.forEach((key, value) -> paintBlackPieces(g2D, value));
         if (!firstClick) {
             drawLegalMoves(g2D, whiteToMove, fromX, fromY);
-            //chessboard.blackPlayer.pieceMap.forEach((key, value) -> paintBlackPieces(g2D, value));
         }
 
     }
@@ -175,17 +172,30 @@ public class ChessboardPanel extends JPanel implements MouseListener {
         int fromPosition = fromX + 8 * fromY;
         int toPosition = toX + 8 * toY;
         if (whiteToMove) {
-            chessboard.whitePlayer.pieceMap.put(toPosition, chessboard.whitePlayer.pieceMap.get(fromPosition));
-            chessboard.whitePlayer.pieceMap.get(toPosition).updatePosition(toPosition);
+            Piece originalPiece = chessboard.whitePlayer.pieceMap.get(fromPosition);
+            Piece newPiece = Piece.createNewPiece(toPosition, true, originalPiece.getType());
+
+            chessboard.whitePlayer.pieceMap.put(toPosition, newPiece);
+
+
             chessboard.whitePlayer.pieceMap.remove(fromPosition);
+
             chessboard.blackPlayer.pieceMap.remove(toPosition);
+
+            System.out.println("FINAL");
+            System.out.println(chessboard.whitePlayer.pieceMap);
         } else {
-            chessboard.blackPlayer.pieceMap.put(toPosition, chessboard.blackPlayer.pieceMap.get(fromPosition));
-            chessboard.blackPlayer.pieceMap.get(toPosition).updatePosition(toPosition);
+
+
+            Piece originalPiece = chessboard.blackPlayer.pieceMap.get(fromPosition);
+            Piece newPiece = Piece.createNewPiece(toPosition, false, originalPiece.getType());
+
+            chessboard.blackPlayer.pieceMap.put(toPosition, newPiece);
             chessboard.blackPlayer.pieceMap.remove(fromPosition);
+
             chessboard.whitePlayer.pieceMap.remove(toPosition);
+
         }
-        //System.out.println("hash map " + chessboard.whitePlayer.pieceMap);
     }
 
     @Override
@@ -197,12 +207,10 @@ public class ChessboardPanel extends JPanel implements MouseListener {
                 firstClick = false;
                 fromX /= TILESIZE;
                 fromY /= TILESIZE;
-                //Show possible actions
                 System.out.println(fromX + " actions " + fromY);
             } else {
                 firstClick = true;
             }
-            //System.out.println("First on: " + fromX + ", " + fromY);
 
         } else {
             toX = (e.getX() - OFFSET);
@@ -210,7 +218,7 @@ public class ChessboardPanel extends JPanel implements MouseListener {
             if (ClickedOnChessboard(toX, toY)) {
                 toX /= TILESIZE;
                 toY /= TILESIZE;
-                //Make move
+
                 if (isMoveLegal(toX, toY)) {
                     firstClick = true;
                     legalMoves = null;
@@ -274,7 +282,6 @@ public class ChessboardPanel extends JPanel implements MouseListener {
 
 
     public static boolean isKingTileUnderAttack(boolean whiteColor, Chessboard newChessboard){
-        // Do rewroku!!!!!!!!!!!!!!!!!!!!!!!!!!!!
        if(whiteColor){
            int kingPosition = Chessboard.getKingPosition(true,newChessboard);
             for(int i=0; i<64; i++){
@@ -286,9 +293,9 @@ public class ChessboardPanel extends JPanel implements MouseListener {
             }
 
         }else{
+           int kingPosition = Chessboard.getKingPosition(false,newChessboard);
             for(int i=0; i<64; i++){
-                int kingPosition = Chessboard.getKingPosition(false,newChessboard);
-                if(chessboard.whitePlayer.pieceMap.containsKey(i)&& chessboard.blackPlayer.pieceMap.get(i)!=null){
+                if(chessboard.whitePlayer.pieceMap.containsKey(i)&& chessboard.whitePlayer.pieceMap.get(i)!=null){
                     if(chessboard.whitePlayer.pieceMap.get(i).canAttackThisTile(kingPosition,true, newChessboard)){
                         return  true;
                     }

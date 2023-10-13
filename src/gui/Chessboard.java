@@ -14,18 +14,31 @@ public class Chessboard {
         whitePlayer = new WhitePlayer();
     }
 
+    public Chessboard(int flag){
+        blackPlayer = new BlackPlayer(flag);
+        whitePlayer = new WhitePlayer(flag);
+    }
+
 
 
     public static Chessboard deepCopyChessboard(Chessboard originalChessboard) {
-        Chessboard newChessboard = new Chessboard();
+        int test =1;
+
+        Chessboard newChessboard = new Chessboard(1);
         for (int i = 0; i < 64; i++) {
             if (originalChessboard.blackPlayer.pieceMap.containsKey(i) && originalChessboard.blackPlayer.pieceMap.get(i) != null) {
-                newChessboard.blackPlayer.pieceMap.put(i, Piece.createNewPiece(i, false, originalChessboard.blackPlayer.pieceMap.get(i).getType()));
+                Piece originalPiece = originalChessboard.blackPlayer.pieceMap.get(i);
+                Piece newPiece = Piece.createNewPiece(i, false, originalPiece.getType());
+                newChessboard.blackPlayer.pieceMap.put(i, newPiece);
             }
         }
         for (int i = 0; i < 64; i++) {
             if (originalChessboard.whitePlayer.pieceMap.containsKey(i) && originalChessboard.whitePlayer.pieceMap.get(i) != null) {
-                newChessboard.whitePlayer.pieceMap.put(i, Piece.createNewPiece(i, true, originalChessboard.whitePlayer.pieceMap.get(i).getType()));
+                Piece originalPiece = originalChessboard.whitePlayer.pieceMap.get(i);
+                Piece newPiece = Piece.createNewPiece(i, true, originalPiece.getType());
+                newChessboard.whitePlayer.pieceMap.put(i, newPiece);
+                System.out.println(test);
+                test++;
             }
         }
 

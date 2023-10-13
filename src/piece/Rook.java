@@ -1,9 +1,9 @@
 package piece;
 
 import gui.Chessboard;
-import gui.ChessboardPanel;
 
-import java.sql.SQLOutput;
+
+
 import java.util.ArrayList;
 
 public class Rook extends Piece{
@@ -20,65 +20,64 @@ public class Rook extends Piece{
         int tempX = X - 1;
         int tempY = Y - 1;
         if (this.whiteColor) {
-            while (tempX > -1 && !(ChessboardPanel.isOccupiedByColor(true, calculatePosition(tempX, Y)))) {
+            while (tempX > -1 && !(chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y)))) {
                 legalMoves.add(calculatePosition(tempX, Y));
-                if (ChessboardPanel.isOccupiedByColor(false, calculatePosition(tempX, Y))) {
+                if (chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y))) {
                     break;
                 }
                 --tempX;
             }
             tempX = X + 1;
-            while (tempX < 8 && !(ChessboardPanel.isOccupiedByColor(true, calculatePosition(tempX, Y)))) {
+            while (tempX < 8 && !(chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y)))) {
                 legalMoves.add(calculatePosition(tempX, Y));
-                if (ChessboardPanel.isOccupiedByColor(false, calculatePosition(tempX, Y))) {
+                if (chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y))) {
                     break;
                 }
                 ++tempX;
             }
-            while (tempY > -1 && !(ChessboardPanel.isOccupiedByColor(true, calculatePosition(X, tempY)))) {
+            while (tempY > -1 && !(chessboard.isOccupiedByColor(true, calculatePosition(X, tempY)))) {
                 legalMoves.add(calculatePosition(X, tempY));
-                if (ChessboardPanel.isOccupiedByColor(false, calculatePosition(X, tempY))) {
+                if (chessboard.isOccupiedByColor(false, calculatePosition(X, tempY))) {
                     break;
                 }
                 --tempY;
             }
             tempY = Y + 1;
-            while (tempY < 8 && !(ChessboardPanel.isOccupiedByColor(true, calculatePosition(X, tempY)))) {
+            while (tempY < 8 && !(chessboard.isOccupiedByColor(true, calculatePosition(X, tempY)))) {
                 legalMoves.add(calculatePosition(X, tempY));
-                if (ChessboardPanel.isOccupiedByColor(false, calculatePosition(X, tempY))) {
+                if (chessboard.isOccupiedByColor(false, calculatePosition(X, tempY))) {
                     break;
                 }
                 ++tempY;
             }
 
         }else{
-            while (tempX > -1 && !(ChessboardPanel.isOccupiedByColor(false, calculatePosition(tempX, Y)))) {
+            while (tempX > -1 && !(chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y)))) {
                 legalMoves.add(calculatePosition(tempX, Y));
-                if (ChessboardPanel.isOccupiedByColor(true, calculatePosition(tempX, Y))) {
+                if (chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y))) {
                     break;
                 }
                 --tempX;
             }
             tempX = X + 1;
-            while (tempX < 8 && !(ChessboardPanel.isOccupiedByColor(false, calculatePosition(tempX, Y)))) {
+            while (tempX < 8 && !(chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y)))) {
                 legalMoves.add(calculatePosition(tempX, Y));
-                System.out.println("git");
-                if (ChessboardPanel.isOccupiedByColor(true, calculatePosition(tempX, Y))) {
+                if (chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y))) {
                     break;
                 }
                 ++tempX;
             }
-            while (tempY > -1 && !(ChessboardPanel.isOccupiedByColor(false, calculatePosition(X, tempY)))) {
+            while (tempY > -1 && !(chessboard.isOccupiedByColor(false, calculatePosition(X, tempY)))) {
                 legalMoves.add(calculatePosition(X, tempY));
-                if (ChessboardPanel.isOccupiedByColor(true, calculatePosition(X, tempY))) {
+                if (chessboard.isOccupiedByColor(true, calculatePosition(X, tempY))) {
                     break;
                 }
                 --tempY;
             }
             tempY = Y + 1;
-            while (tempY < 8 && !(ChessboardPanel.isOccupiedByColor(false, calculatePosition(X, tempY)))) {
+            while (tempY < 8 && !(chessboard.isOccupiedByColor(false, calculatePosition(X, tempY)))) {
                 legalMoves.add(calculatePosition(X, tempY));
-                if (ChessboardPanel.isOccupiedByColor(true, calculatePosition(X, tempY))) {
+                if (chessboard.isOccupiedByColor(true, calculatePosition(X, tempY))) {
                     break;
                 }
                 ++tempY;
@@ -94,6 +93,10 @@ public class Rook extends Piece{
 
     @Override
     public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
+        ArrayList<Integer> arrayList = getLegalMoves(chessboard);
+        if(arrayList.contains(position)){
+            return true;
+        }
         return false;
     }
 }

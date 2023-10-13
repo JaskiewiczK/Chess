@@ -28,6 +28,10 @@ public class Queen extends Piece{
 
     @Override
     public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
+        ArrayList<Integer> arrayList = getLegalMoves(chessboard);
+       if(arrayList.contains(position)) {
+           return true;
+       }
         return false;
     }
 }

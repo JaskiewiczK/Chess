@@ -23,6 +23,9 @@ public class BlackPlayer extends Player{
         }
 
     }
+    public BlackPlayer(int flag){
+
+    }
 
 }
 

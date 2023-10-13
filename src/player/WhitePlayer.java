@@ -21,4 +21,8 @@ public class WhitePlayer extends Player{
             pieceMap.put(i, new Pawn(i, true));
         }
     }
+
+    public  WhitePlayer(int flag){
+
+    }
 }
