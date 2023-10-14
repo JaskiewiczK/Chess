@@ -15,9 +15,6 @@ public abstract class Piece {
     public int calculatePosition(int X, int Y){
         return X+8*Y;
     }
-    public void updatePosition(int newPosition) {
-        this.position = newPosition;
-    }
 
     public abstract boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard);
 
@@ -41,9 +38,8 @@ public abstract class Piece {
 
         Chessboard newChessboard = Chessboard.deepCopyChessboard(chessboard);
         boolean isKingUnderAttackFlag = false;
-
         if (whiteColor) {
-
+            System.out.println(newChessboard.whitePlayer.pieceMap.get(fromPosition));
 
             Piece originalPiece = newChessboard.whitePlayer.pieceMap.get(fromPosition);
             Piece newPiece = Piece.createNewPiece(toPosition, true, originalPiece.getType());
@@ -62,6 +58,7 @@ public abstract class Piece {
 
         } else {
 
+            System.out.println(newChessboard.blackPlayer.pieceMap.get(fromPosition));
             Piece originalPiece = newChessboard.blackPlayer.pieceMap.get(fromPosition);
             Piece newPiece = Piece.createNewPiece(toPosition, false, originalPiece.getType());
 

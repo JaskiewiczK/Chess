@@ -12,7 +12,7 @@ public class Queen extends Piece{
     }
     @Override
     public ArrayList<Integer> getLegalMoves(Chessboard chessboard) {
-        ArrayList<Integer> legalMoves = new ArrayList<Integer>();
+        ArrayList<Integer> legalMoves = new ArrayList<>();
 
         Rook rook = new Rook(this.position, whiteColor);
         Bishop bishop = new Bishop(this.position, whiteColor);
@@ -28,10 +28,8 @@ public class Queen extends Piece{
 
     @Override
     public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
-        ArrayList<Integer> arrayList = getLegalMoves(chessboard);
-       if(arrayList.contains(position)) {
-           return true;
-       }
-        return false;
+        Rook rook = new Rook(this.position, whiteColor);
+        Bishop bishop = new Bishop(this.position, whiteColor);
+        return (rook.canAttackThisTile(position, whiteColor, chessboard) || bishop.canAttackThisTile(position, whiteColor, chessboard));
     }
 }
