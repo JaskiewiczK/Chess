@@ -22,8 +22,6 @@ public class Chessboard {
 
 
     public static Chessboard deepCopyChessboard(Chessboard originalChessboard) {
-        int test =1;
-
         Chessboard newChessboard = new Chessboard(1);
         for (int i = 0; i < 64; i++) {
             if (originalChessboard.blackPlayer.pieceMap.containsKey(i) && originalChessboard.blackPlayer.pieceMap.get(i) != null) {
@@ -37,8 +35,6 @@ public class Chessboard {
                 Piece originalPiece = originalChessboard.whitePlayer.pieceMap.get(i);
                 Piece newPiece = Piece.createNewPiece(i, true, originalPiece.getType());
                 newChessboard.whitePlayer.pieceMap.put(i, newPiece);
-                System.out.println(test);
-                test++;
             }
         }
 

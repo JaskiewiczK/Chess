@@ -40,10 +40,6 @@ public abstract class Piece {
     protected static boolean isKingUnderAttack(int fromPosition, int toPosition, boolean whiteColor, Chessboard chessboard){
 
         Chessboard newChessboard = Chessboard.deepCopyChessboard(chessboard);
-        System.out.println("stan na kopie");
-        System.out.println(newChessboard.whitePlayer.pieceMap);
-        System.out.println("-a-a-a-a-a--a-a-a-a-a--a-a-a-");
-        System.out.println(chessboard.whitePlayer.pieceMap);
         boolean isKingUnderAttackFlag = false;
 
         if (whiteColor) {

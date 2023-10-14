@@ -182,8 +182,6 @@ public class ChessboardPanel extends JPanel implements MouseListener {
 
             chessboard.blackPlayer.pieceMap.remove(toPosition);
 
-            System.out.println("FINAL");
-            System.out.println(chessboard.whitePlayer.pieceMap);
         } else {
 
 
