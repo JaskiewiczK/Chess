@@ -1,9 +1,8 @@
 package gui;
 
 import piece.EnumPiece;
+import piece.Pawn;
 import piece.Piece;
-import player.BlackPlayer;
-import player.WhitePlayer;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,6 +19,7 @@ public class ChessboardPanel extends JPanel implements MouseListener {
 
     ArrayList<Integer> legalMoves;
 
+    public static int moveNumber=0;
     boolean firstClick = true;
     boolean whiteToMove = true;
     int fromX;
@@ -174,9 +174,17 @@ public class ChessboardPanel extends JPanel implements MouseListener {
         if (whiteToMove) {
             Piece originalPiece = chessboard.whitePlayer.pieceMap.get(fromPosition);
             Piece newPiece = Piece.createNewPiece(toPosition, true, originalPiece.getType());
+            if(newPiece.getType() == EnumPiece.PAWN){
+                if(fromY-toY==2) {
+                    Pawn temp = (Pawn) newPiece;
+                    temp.longMoveNumber = ChessboardPanel.moveNumber;
+                }
+                /*if(fromX!=toX && fromY == 3){
+
+                }*/
+            }
 
             chessboard.whitePlayer.pieceMap.put(toPosition, newPiece);
-
 
             chessboard.whitePlayer.pieceMap.remove(fromPosition);
 
@@ -188,12 +196,19 @@ public class ChessboardPanel extends JPanel implements MouseListener {
             Piece originalPiece = chessboard.blackPlayer.pieceMap.get(fromPosition);
             Piece newPiece = Piece.createNewPiece(toPosition, false, originalPiece.getType());
 
+            if(newPiece.getType() == EnumPiece.PAWN && toY-fromY==2){
+                Pawn temp = (Pawn) newPiece;
+                temp.longMoveNumber = ChessboardPanel.moveNumber;
+            }
+
             chessboard.blackPlayer.pieceMap.put(toPosition, newPiece);
             chessboard.blackPlayer.pieceMap.remove(fromPosition);
 
             chessboard.whitePlayer.pieceMap.remove(toPosition);
 
         }
+
+        ++ChessboardPanel.moveNumber;
     }
 
     @Override
