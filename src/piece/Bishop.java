@@ -107,7 +107,7 @@ public class Bishop extends Piece{
 
     @Override
     public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
-        System.out.println(chessboard.whitePlayer.pieceMap);
+
         ArrayList<Integer> legalMoves = new ArrayList<>();
         int X = this.position % 8;
         int Y = this.position / 8;
