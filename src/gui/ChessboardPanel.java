@@ -179,9 +179,9 @@ public class ChessboardPanel extends JPanel implements MouseListener {
                     Pawn temp = (Pawn) newPiece;
                     temp.longMoveNumber = ChessboardPanel.moveNumber;
                 }
-                /*if(fromX!=toX && fromY == 3){
-
-                }*/
+                if(fromX!=toX && fromY == 3 && isOccupiedByColor(false, (toX+8*fromY))){
+                    chessboard.blackPlayer.pieceMap.remove(toX+8*fromY);
+                }
             }
 
             chessboard.whitePlayer.pieceMap.put(toPosition, newPiece);
@@ -196,9 +196,15 @@ public class ChessboardPanel extends JPanel implements MouseListener {
             Piece originalPiece = chessboard.blackPlayer.pieceMap.get(fromPosition);
             Piece newPiece = Piece.createNewPiece(toPosition, false, originalPiece.getType());
 
-            if(newPiece.getType() == EnumPiece.PAWN && toY-fromY==2){
-                Pawn temp = (Pawn) newPiece;
-                temp.longMoveNumber = ChessboardPanel.moveNumber;
+            if(newPiece.getType() == EnumPiece.PAWN){
+                if(toY-fromY==2) {
+                    Pawn temp = (Pawn) newPiece;
+                    temp.longMoveNumber = ChessboardPanel.moveNumber;
+                }
+                if(fromX!=toX && fromY ==4 && isOccupiedByColor(true, (toX+8*fromY))){
+                    chessboard.whitePlayer.pieceMap.remove(toX+8*fromY);
+                }
+
             }
 
             chessboard.blackPlayer.pieceMap.put(toPosition, newPiece);
