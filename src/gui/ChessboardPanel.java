@@ -17,7 +17,7 @@ public class ChessboardPanel extends JPanel implements MouseListener {
 
     ArrayList<Integer> legalMoves;
 
-    public static int moveNumber=0;
+    public static int moveNumber = 0;
     boolean firstClick = true;
     boolean whiteToMove = true;
     int fromX;
@@ -172,40 +172,39 @@ public class ChessboardPanel extends JPanel implements MouseListener {
         if (whiteToMove) {
             Piece originalPiece = chessboard.whitePlayer.pieceMap.get(fromPosition);
             Piece newPiece = Piece.createNewPiece(toPosition, true, originalPiece.getType());
-            if(newPiece.getType() == EnumPiece.PAWN){
-                if(fromY-toY==2) {
+            if (newPiece.getType() == EnumPiece.PAWN) {
+                if (fromY - toY == 2) {
                     Pawn temp = (Pawn) newPiece;
                     temp.longMoveNumber = ChessboardPanel.moveNumber;
                 }
-                if(fromX!=toX && fromY == 3 && isOccupiedByColor(false, (toX+8*fromY))){
-                    chessboard.blackPlayer.pieceMap.remove(toX+8*fromY);
+                if (fromX != toX && fromY == 3 && isOccupiedByColor(false, (toX + 8 * fromY))) {
+                    chessboard.blackPlayer.pieceMap.remove(toX + 8 * fromY);
                 }
             }
 
 
-
-            if(newPiece.getType()==EnumPiece.ROOK){
+            if (newPiece.getType() == EnumPiece.ROOK) {
                 Rook temp = (Rook) newPiece;
-                temp.hasAlreadyMoved=true;
+                temp.hasAlreadyMoved = true;
             }
 
 
-            if(newPiece.getType()==EnumPiece.KING){
+            if (newPiece.getType() == EnumPiece.KING) {
                 King temp = (King) newPiece;
-                temp.hasAlreadyMoved=true;
+                temp.hasAlreadyMoved = true;
             }
 
-            if(newPiece.getType()==EnumPiece.KING && Math.abs(fromX-toX)==2){
-                if(toX==6){
+            if (newPiece.getType() == EnumPiece.KING && Math.abs(fromX - toX) == 2) {
+                if (toX == 6) {
                     Piece tempOriginalPiece = chessboard.whitePlayer.pieceMap.get(63);
-                    Piece tempNewPiece =Piece.createNewPiece(61, true, tempOriginalPiece.getType());
+                    Piece tempNewPiece = Piece.createNewPiece(61, true, tempOriginalPiece.getType());
                     chessboard.whitePlayer.pieceMap.put(61, tempNewPiece);
                     chessboard.whitePlayer.pieceMap.remove(63);
-                }else{
-                        Piece tempOriginalPiece = chessboard.whitePlayer.pieceMap.get(56);
-                        Piece tempNewPiece =Piece.createNewPiece(59, true, tempOriginalPiece.getType());
-                        chessboard.whitePlayer.pieceMap.put(59, tempNewPiece);
-                        chessboard.whitePlayer.pieceMap.remove(56);
+                } else {
+                    Piece tempOriginalPiece = chessboard.whitePlayer.pieceMap.get(56);
+                    Piece tempNewPiece = Piece.createNewPiece(59, true, tempOriginalPiece.getType());
+                    chessboard.whitePlayer.pieceMap.put(59, tempNewPiece);
+                    chessboard.whitePlayer.pieceMap.remove(56);
                 }
             }
 
@@ -221,37 +220,37 @@ public class ChessboardPanel extends JPanel implements MouseListener {
             Piece originalPiece = chessboard.blackPlayer.pieceMap.get(fromPosition);
             Piece newPiece = Piece.createNewPiece(toPosition, false, originalPiece.getType());
 
-            if(newPiece.getType() == EnumPiece.PAWN){
-                if(toY-fromY==2) {
+            if (newPiece.getType() == EnumPiece.PAWN) {
+                if (toY - fromY == 2) {
                     Pawn temp = (Pawn) newPiece;
                     temp.longMoveNumber = ChessboardPanel.moveNumber;
                 }
-                if(fromX!=toX && fromY ==4 && isOccupiedByColor(true, (toX+8*fromY))){
-                    chessboard.whitePlayer.pieceMap.remove(toX+8*fromY);
+                if (fromX != toX && fromY == 4 && isOccupiedByColor(true, (toX + 8 * fromY))) {
+                    chessboard.whitePlayer.pieceMap.remove(toX + 8 * fromY);
                 }
 
             }
 
-            if(newPiece.getType()==EnumPiece.ROOK){
+            if (newPiece.getType() == EnumPiece.ROOK) {
                 Rook temp = (Rook) newPiece;
-                temp.hasAlreadyMoved=true;
+                temp.hasAlreadyMoved = true;
             }
 
 
-            if(newPiece.getType()==EnumPiece.KING){
+            if (newPiece.getType() == EnumPiece.KING) {
                 King temp = (King) newPiece;
-                temp.hasAlreadyMoved=true;
+                temp.hasAlreadyMoved = true;
             }
 
-            if(newPiece.getType()==EnumPiece.KING && Math.abs(fromX-toX)==2){
-                if(toX==6){
+            if (newPiece.getType() == EnumPiece.KING && Math.abs(fromX - toX) == 2) {
+                if (toX == 6) {
                     Piece tempOriginalPiece = chessboard.blackPlayer.pieceMap.get(7);
-                    Piece tempNewPiece =Piece.createNewPiece(5, false, tempOriginalPiece.getType());
+                    Piece tempNewPiece = Piece.createNewPiece(5, false, tempOriginalPiece.getType());
                     chessboard.blackPlayer.pieceMap.put(5, tempNewPiece);
                     chessboard.blackPlayer.pieceMap.remove(7);
-                }else{
+                } else {
                     Piece tempOriginalPiece = chessboard.blackPlayer.pieceMap.get(0);
-                    Piece tempNewPiece =Piece.createNewPiece(3, false, tempOriginalPiece.getType());
+                    Piece tempNewPiece = Piece.createNewPiece(3, false, tempOriginalPiece.getType());
                     chessboard.blackPlayer.pieceMap.put(3, tempNewPiece);
                     chessboard.blackPlayer.pieceMap.remove(0);
                 }
@@ -262,6 +261,10 @@ public class ChessboardPanel extends JPanel implements MouseListener {
 
             chessboard.whitePlayer.pieceMap.remove(toPosition);
 
+        }
+        repaint();
+        if(!isThereAnyLegalMove(chessboard, whiteToMove)){
+            checkForWinOrDraw(chessboard, whiteToMove);
         }
 
         ++ChessboardPanel.moveNumber;
@@ -276,7 +279,7 @@ public class ChessboardPanel extends JPanel implements MouseListener {
                 firstClick = false;
                 fromX /= TILESIZE;
                 fromY /= TILESIZE;
-                System.out.println(fromX + " actions " + fromY);
+
             } else {
                 firstClick = true;
             }
@@ -297,11 +300,11 @@ public class ChessboardPanel extends JPanel implements MouseListener {
                     } else {
                         whiteToMove = true;
                     }
-                    System.out.printf(firstClick + " " + whiteToMove);
+
                 } else {
                     firstClick = true;
                 }
-                System.out.println((toX) + " make move " + (toY));
+
             } else {
                 firstClick = false;
 
@@ -340,33 +343,32 @@ public class ChessboardPanel extends JPanel implements MouseListener {
                 return false;
             }
         } else {
-            if(chessboard.blackPlayer.pieceMap.containsKey(position)){
+            if (chessboard.blackPlayer.pieceMap.containsKey(position)) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }
     }
 
 
-
-    public static boolean isKingTileUnderAttack(boolean whiteColor, Chessboard newChessboard){
-       if(whiteColor){
-           int kingPosition = Chessboard.getKingPosition(true,newChessboard);
-            for(int i=0; i<64; i++){
-                if(newChessboard.blackPlayer.pieceMap.containsKey(i) && newChessboard.blackPlayer.pieceMap.get(i)!=null){
-                    if(newChessboard.blackPlayer.pieceMap.get(i).canAttackThisTile(kingPosition,false, newChessboard)){
-                        return  true;
+    public static boolean isKingTileUnderAttack(boolean whiteColor, Chessboard newChessboard) {
+        if (whiteColor) {
+            int kingPosition = Chessboard.getKingPosition(true, newChessboard);
+            for (int i = 0; i < 64; i++) {
+                if (newChessboard.blackPlayer.pieceMap.containsKey(i) && newChessboard.blackPlayer.pieceMap.get(i) != null) {
+                    if (newChessboard.blackPlayer.pieceMap.get(i).canAttackThisTile(kingPosition, false, newChessboard)) {
+                        return true;
                     }
                 }
             }
 
-        }else{
-           int kingPosition = Chessboard.getKingPosition(false,newChessboard);
-            for(int i=0; i<64; i++){
-                if(chessboard.whitePlayer.pieceMap.containsKey(i)&& chessboard.whitePlayer.pieceMap.get(i)!=null){
-                    if(chessboard.whitePlayer.pieceMap.get(i).canAttackThisTile(kingPosition,true, newChessboard)){
-                        return  true;
+        } else {
+            int kingPosition = Chessboard.getKingPosition(false, newChessboard);
+            for (int i = 0; i < 64; i++) {
+                if (chessboard.whitePlayer.pieceMap.containsKey(i) && chessboard.whitePlayer.pieceMap.get(i) != null) {
+                    if (chessboard.whitePlayer.pieceMap.get(i).canAttackThisTile(kingPosition, true, newChessboard)) {
+                        return true;
                     }
                 }
             }
@@ -374,7 +376,68 @@ public class ChessboardPanel extends JPanel implements MouseListener {
         return false;
     }
 
+    public void displayWinMessage(boolean isWhiteWinner) {
+        if (isWhiteWinner) {
+            JOptionPane.showMessageDialog(this, "Congratulations! White player won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Congratulations! Black player won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+
+    public void displayDrawMessage() {
+        JOptionPane.showMessageDialog(this, "The match has ended in a draw.", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void checkForWinOrDraw(Chessboard chessboard, boolean whiteToMove) {
+            if(whiteToMove){
+                if(isKingTileUnderAttack(false,chessboard))
+                    displayWinMessage(true);
+                else {
+                    displayDrawMessage();
+                }
+            }else{
+                if(isKingTileUnderAttack(true,chessboard))
+                    displayWinMessage(false);
+                else {
+                    displayDrawMessage();
+                }
+            }
+
+        }
+
+
+    public boolean isThereAnyLegalMove(Chessboard chessboard, boolean whiteToMove){
+        if (whiteToMove) {
+
+            for (int i = 0; i < 64; i++) {
+                if (chessboard.blackPlayer.pieceMap.containsKey(i) && chessboard.blackPlayer.pieceMap.get(i) != null) {
+                    legalMoves = chessboard.blackPlayer.pieceMap.get(i).getLegalMoves(chessboard);
+                    if (!legalMoves.isEmpty()) {
+                        return true;
+                    }
+                }
+            }
+
+
+        } else {
+            for (int i = 0; i < 64; i++) {
+                if (chessboard.whitePlayer.pieceMap.containsKey(i) && chessboard.whitePlayer.pieceMap.get(i) != null) {
+                    legalMoves = chessboard.whitePlayer.pieceMap.get(i).getLegalMoves(chessboard);
+                    if (!legalMoves.isEmpty()) {
+                        return true;
+                    }
+                }
+            }
+
+        }
+        return false;
+    }
+
+
+
 }
+
 
 
 
