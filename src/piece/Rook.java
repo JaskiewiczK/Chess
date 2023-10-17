@@ -7,6 +7,8 @@ import gui.Chessboard;
 import java.util.ArrayList;
 
 public class Rook extends Piece{
+
+    public boolean hasAlreadyMoved;
     public Rook(int position, boolean whiteColor){
         this.position = position;
         this.whiteColor = whiteColor;

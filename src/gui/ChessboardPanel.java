@@ -1,8 +1,6 @@
 package gui;
 
-import piece.EnumPiece;
-import piece.Pawn;
-import piece.Piece;
+import piece.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -184,6 +182,33 @@ public class ChessboardPanel extends JPanel implements MouseListener {
                 }
             }
 
+
+
+            if(newPiece.getType()==EnumPiece.ROOK){
+                Rook temp = (Rook) newPiece;
+                temp.hasAlreadyMoved=true;
+            }
+
+
+            if(newPiece.getType()==EnumPiece.KING){
+                King temp = (King) newPiece;
+                temp.hasAlreadyMoved=true;
+            }
+
+            if(newPiece.getType()==EnumPiece.KING && Math.abs(fromX-toX)==2){
+                if(toX==6){
+                    Piece tempOriginalPiece = chessboard.whitePlayer.pieceMap.get(63);
+                    Piece tempNewPiece =Piece.createNewPiece(61, true, tempOriginalPiece.getType());
+                    chessboard.whitePlayer.pieceMap.put(61, tempNewPiece);
+                    chessboard.whitePlayer.pieceMap.remove(63);
+                }else{
+                        Piece tempOriginalPiece = chessboard.whitePlayer.pieceMap.get(56);
+                        Piece tempNewPiece =Piece.createNewPiece(59, true, tempOriginalPiece.getType());
+                        chessboard.whitePlayer.pieceMap.put(59, tempNewPiece);
+                        chessboard.whitePlayer.pieceMap.remove(56);
+                }
+            }
+
             chessboard.whitePlayer.pieceMap.put(toPosition, newPiece);
 
             chessboard.whitePlayer.pieceMap.remove(fromPosition);
@@ -205,6 +230,31 @@ public class ChessboardPanel extends JPanel implements MouseListener {
                     chessboard.whitePlayer.pieceMap.remove(toX+8*fromY);
                 }
 
+            }
+
+            if(newPiece.getType()==EnumPiece.ROOK){
+                Rook temp = (Rook) newPiece;
+                temp.hasAlreadyMoved=true;
+            }
+
+
+            if(newPiece.getType()==EnumPiece.KING){
+                King temp = (King) newPiece;
+                temp.hasAlreadyMoved=true;
+            }
+
+            if(newPiece.getType()==EnumPiece.KING && Math.abs(fromX-toX)==2){
+                if(toX==6){
+                    Piece tempOriginalPiece = chessboard.blackPlayer.pieceMap.get(7);
+                    Piece tempNewPiece =Piece.createNewPiece(5, false, tempOriginalPiece.getType());
+                    chessboard.blackPlayer.pieceMap.put(5, tempNewPiece);
+                    chessboard.blackPlayer.pieceMap.remove(7);
+                }else{
+                    Piece tempOriginalPiece = chessboard.blackPlayer.pieceMap.get(0);
+                    Piece tempNewPiece =Piece.createNewPiece(3, false, tempOriginalPiece.getType());
+                    chessboard.blackPlayer.pieceMap.put(3, tempNewPiece);
+                    chessboard.blackPlayer.pieceMap.remove(0);
+                }
             }
 
             chessboard.blackPlayer.pieceMap.put(toPosition, newPiece);
