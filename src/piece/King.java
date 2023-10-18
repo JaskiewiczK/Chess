@@ -24,7 +24,7 @@ public class King extends Piece{
                 if(temp.hasAlreadyMoved){
                     return  false;
                 }
-                if(chessboard.isOccupiedByColor(true, 59) || chessboard.isOccupiedByColor(false, 59) || chessboard.isOccupiedByColor(true, 58) || chessboard.isOccupiedByColor(false, 58)){
+                if(chessboard.isOccupiedByColor(true, 59) || chessboard.isOccupiedByColor(false, 59) || chessboard.isOccupiedByColor(true, 58) || chessboard.isOccupiedByColor(false, 58) || chessboard.isOccupiedByColor(true, 57) || chessboard.isOccupiedByColor(false, 57)){
                     return false;
                 }
                 if(ChessboardPanel.isKingTileUnderAttack(true, chessboard) || isKingUnderAttack(60,59,true,chessboard) || isKingUnderAttack(60,58,true,chessboard)){
@@ -39,7 +39,7 @@ public class King extends Piece{
                 if(temp.hasAlreadyMoved){
                     return  false;
                 }
-                if(chessboard.isOccupiedByColor(true, 3) || chessboard.isOccupiedByColor(false, 3) || chessboard.isOccupiedByColor(true, 2) || chessboard.isOccupiedByColor(false, 2)){
+                if(chessboard.isOccupiedByColor(true, 3) || chessboard.isOccupiedByColor(false, 3) || chessboard.isOccupiedByColor(true, 2) || chessboard.isOccupiedByColor(false, 2) || chessboard.isOccupiedByColor(true, 1) || chessboard.isOccupiedByColor(false, 1)){
                     return false;
                 }
                 if(ChessboardPanel.isKingTileUnderAttack(false, chessboard) || isKingUnderAttack(4,3,false,chessboard) || isKingUnderAttack(4,2,false,chessboard)){
