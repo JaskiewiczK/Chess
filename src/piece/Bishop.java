@@ -19,8 +19,9 @@ public class Bishop extends Piece{
         int tempX = X-1;
         int tempY = Y-1;
         if(this.whiteColor){
-            while(tempX>-1 && tempY>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard)){
-                legalMoves.add(calculatePosition(tempX,tempY));
+            while(tempX>-1 && tempY>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard))
+                    legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
                     break;
                 }
@@ -29,8 +30,9 @@ public class Bishop extends Piece{
             }
             tempX=X-1;
             tempY=Y+1;
-            while(tempX>-1 && tempY<8 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard)){
-                legalMoves.add(calculatePosition(tempX,tempY));
+            while(tempX>-1 && tempY<8 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard))
+                    legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
                     break;
                 }
@@ -39,8 +41,9 @@ public class Bishop extends Piece{
             }
             tempX=X+1;
             tempY=Y-1;
-            while(tempX<8 && tempY>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard)){
-                legalMoves.add(calculatePosition(tempX,tempY));
+            while(tempX<8 && tempY>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard))
+                    legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
                     break;
                 }
@@ -49,8 +52,9 @@ public class Bishop extends Piece{
             }
             tempX=X+1;
             tempY=Y+1;
-            while(tempX<8 && tempY<8 && !( chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard)){
-                legalMoves.add(calculatePosition(tempX,tempY));
+            while(tempX<8 && tempY<8 && !( chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard))
+                    legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
                     break;
                 }
@@ -58,8 +62,9 @@ public class Bishop extends Piece{
                 ++tempY;
             }
         }else{
-            while(tempX>-1 && tempY>-1 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), false, chessboard)){
-                legalMoves.add(calculatePosition(tempX,tempY));
+            while(tempX>-1 && tempY>-1 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), false, chessboard))
+                    legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
                     break;
                 }
@@ -68,8 +73,9 @@ public class Bishop extends Piece{
             }
             tempX=X-1;
             tempY=Y+1;
-            while(tempX>-1 && tempY<8 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), false, chessboard)){
-                legalMoves.add(calculatePosition(tempX,tempY));
+            while(tempX>-1 && tempY<8 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), false, chessboard))
+                    legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
                     break;
                 }
@@ -78,8 +84,9 @@ public class Bishop extends Piece{
             }
             tempX=X+1;
             tempY=Y-1;
-            while(tempX<8 && tempY>-1 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), false, chessboard)){
-                legalMoves.add(calculatePosition(tempX,tempY));
+            while(tempX<8 && tempY>-1 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), false, chessboard))
+                    legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
                     break;
                 }
@@ -88,8 +95,9 @@ public class Bishop extends Piece{
             }
             tempX=X+1;
             tempY=Y+1;
-            while(tempX<8 && tempY<8 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), false, chessboard)){
-                legalMoves.add(calculatePosition(tempX,tempY));
+            while(tempX<8 && tempY<8 && !(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), false, chessboard))
+                    legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY))){
                     break;
                 }

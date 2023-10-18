@@ -22,31 +22,35 @@ public class Rook extends Piece{
         int tempX = X - 1;
         int tempY = Y - 1;
         if (this.whiteColor) {
-            while (tempX > -1 && !(chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,Y), true, chessboard)) {
-                legalMoves.add(calculatePosition(tempX, Y));
+            while (tempX > -1 && !(chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y)))) {
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,Y), true, chessboard))
+                    legalMoves.add(calculatePosition(tempX, Y));
                 if (chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y))) {
                     break;
                 }
                 --tempX;
             }
             tempX = X + 1;
-            while (tempX < 8 && !(chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,Y), true, chessboard)) {
-                legalMoves.add(calculatePosition(tempX, Y));
+            while (tempX < 8 && !(chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,Y), true, chessboard))
+                    legalMoves.add(calculatePosition(tempX, Y));
                 if (chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y))) {
                     break;
                 }
                 ++tempX;
             }
-            while (tempY > -1 && !(chessboard.isOccupiedByColor(true, calculatePosition(X, tempY)))&& !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), true, chessboard)) {
-                legalMoves.add(calculatePosition(X, tempY));
+            while (tempY > -1 && !(chessboard.isOccupiedByColor(true, calculatePosition(X, tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), true, chessboard))
+                    legalMoves.add(calculatePosition(X, tempY));
                 if (chessboard.isOccupiedByColor(false, calculatePosition(X, tempY)) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), true, chessboard)) {
                     break;
                 }
                 --tempY;
             }
             tempY = Y + 1;
-            while (tempY < 8 && !(chessboard.isOccupiedByColor(true, calculatePosition(X, tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), true, chessboard)) {
-                legalMoves.add(calculatePosition(X, tempY));
+            while (tempY < 8 && !(chessboard.isOccupiedByColor(true, calculatePosition(X, tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), true, chessboard))
+                    legalMoves.add(calculatePosition(X, tempY));
                 if (chessboard.isOccupiedByColor(false, calculatePosition(X, tempY))) {
                     break;
                 }
@@ -54,31 +58,35 @@ public class Rook extends Piece{
             }
 
         }else{
-            while (tempX > -1 && !(chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,Y), false, chessboard)) {
-                legalMoves.add(calculatePosition(tempX, Y));
+            while (tempX > -1 && !(chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,Y), false, chessboard))
+                    legalMoves.add(calculatePosition(tempX, Y));
                 if (chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y))) {
                     break;
                 }
                 --tempX;
             }
             tempX = X + 1;
-            while (tempX < 8 && !(chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,Y), false, chessboard)) {
-                legalMoves.add(calculatePosition(tempX, Y));
+            while (tempX < 8 && !(chessboard.isOccupiedByColor(false, calculatePosition(tempX, Y)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,Y), false, chessboard))
+                    legalMoves.add(calculatePosition(tempX, Y));
                 if (chessboard.isOccupiedByColor(true, calculatePosition(tempX, Y))) {
                     break;
                 }
                 ++tempX;
             }
-            while (tempY > -1 && !(chessboard.isOccupiedByColor(false, calculatePosition(X, tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), false, chessboard)) {
-                legalMoves.add(calculatePosition(X, tempY));
+            while (tempY > -1 && !(chessboard.isOccupiedByColor(false, calculatePosition(X, tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), false, chessboard))
+                    legalMoves.add(calculatePosition(X, tempY));
                 if (chessboard.isOccupiedByColor(true, calculatePosition(X, tempY))) {
                     break;
                 }
                 --tempY;
             }
             tempY = Y + 1;
-            while (tempY < 8 && !(chessboard.isOccupiedByColor(false, calculatePosition(X, tempY))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), false, chessboard)) {
-                legalMoves.add(calculatePosition(X, tempY));
+            while (tempY < 8 && !(chessboard.isOccupiedByColor(false, calculatePosition(X, tempY)))){
+                if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,tempY), false, chessboard))
+                    legalMoves.add(calculatePosition(X, tempY));
                 if (chessboard.isOccupiedByColor(true, calculatePosition(X, tempY))) {
                     break;
                 }

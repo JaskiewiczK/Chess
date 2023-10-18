@@ -66,7 +66,6 @@ public abstract class Piece {
             newChessboard.blackPlayer.pieceMap.remove(fromPosition);
 
             newChessboard.whitePlayer.pieceMap.remove(toPosition);
-
             if(ChessboardPanel.isKingTileUnderAttack(false, newChessboard)){
                 isKingUnderAttackFlag = true;
             }
