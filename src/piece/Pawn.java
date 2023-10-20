@@ -11,13 +11,13 @@ public class Pawn extends Piece{
     public int longMoveNumber = -1;
     public Pawn(int position, boolean whiteColor){
         this.position = position;
-        this.whiteColor = whiteColor;
+        this.isWhiteColor = whiteColor;
     }
 
     @Override
     public ArrayList<Integer> getLegalMoves(Chessboard chessboard) {
-        ArrayList<Integer> legalMoves = new ArrayList<Integer>();
-        if(this.whiteColor){
+        ArrayList<Integer> legalMoves = new ArrayList<>();
+        if(this.isWhiteColor){
             if(!(chessboard.isOccupiedByColor(true, this.position-8))&& !(chessboard.isOccupiedByColor(false,this.position-8))&& !isKingUnderAttack(this.position,this.position-8, true, chessboard )) {
                 legalMoves.add(this.position - 8);
                 if((this.position/8)==6 && !(chessboard.isOccupiedByColor(true,this.position-16)) && !(chessboard.isOccupiedByColor(false,this.position-16)) && !isKingUnderAttack(this.position,this.position-16, true, chessboard ) ){
@@ -134,56 +134,44 @@ public class Pawn extends Piece{
     }
 
     @Override
-    public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
-        if(whiteColor){
+    public boolean canAttackThisTile(int tilePosition, boolean isWhiteColorAttacking, Chessboard chessboard) {
+        if(isWhiteColorAttacking){
             if(this.position%8==0){
                 if(chessboard.isOccupiedByColor(false,this.position-7)) {
-                    if(this.position-7==position){
-                        return true;
-                    }
+                    return this.position - 7 == tilePosition;
 
                 }
             }else if(this.position%8==7){
                 if(chessboard.isOccupiedByColor(false, this.position-9)){
-                    if(this.position-9==position){
-                        return true;
-                    }
+                    return this.position - 9 == tilePosition;
                 }
             }else {
                 if(chessboard.isOccupiedByColor(false,this.position-7)) {
-                    if(this.position-7==position){
+                    if(this.position-7== tilePosition){
                         return true;
                     }
                 }
                 if(chessboard.isOccupiedByColor(false, this.position-9)){
-                    if(this.position-9==position){
-                        return true;
-                    }
+                    return this.position - 9 == tilePosition;
                 }
             }
         }else{
             if(this.position%8==0){
                 if(chessboard.isOccupiedByColor(true,this.position+9)) {
-                    if(this.position+9==position){
-                        return true;
-                    }
+                    return this.position + 9 == tilePosition;
                 }
             }else if(this.position%8==7){
                 if(chessboard.isOccupiedByColor(true,this.position+7) ){
-                    if (this.position+7 == position) {
-                        return true;
-                    }
+                    return this.position + 7 == tilePosition;
                 }
             }else {
                 if(chessboard.isOccupiedByColor(true,this.position+7)) {
-                    if(this.position+7==position){
+                    if(this.position+7== tilePosition){
                         return true;
                     }
                 }
                 if(chessboard.isOccupiedByColor(true, this.position+9)){
-                    if(this.position+9==position){
-                        return true;
-                    }
+                    return this.position + 9 == tilePosition;
                 }
             }
         }

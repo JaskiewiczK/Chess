@@ -8,14 +8,14 @@ public class Queen extends Piece{
 
     public Queen(int position, boolean whiteColor){
         this.position = position;
-        this.whiteColor = whiteColor;
+        this.isWhiteColor = whiteColor;
     }
     @Override
     public ArrayList<Integer> getLegalMoves(Chessboard chessboard) {
         ArrayList<Integer> legalMoves = new ArrayList<>();
 
-        Rook rook = new Rook(this.position, whiteColor);
-        Bishop bishop = new Bishop(this.position, whiteColor);
+        Rook rook = new Rook(this.position, isWhiteColor);
+        Bishop bishop = new Bishop(this.position, isWhiteColor);
         legalMoves.addAll(rook.getLegalMoves(chessboard));
         legalMoves.addAll(bishop.getLegalMoves(chessboard));
         return legalMoves;
@@ -27,9 +27,9 @@ public class Queen extends Piece{
     }
 
     @Override
-    public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
-        Rook rook = new Rook(this.position, whiteColor);
-        Bishop bishop = new Bishop(this.position, whiteColor);
-        return (rook.canAttackThisTile(position, whiteColor, chessboard) || bishop.canAttackThisTile(position, whiteColor, chessboard));
+    public boolean canAttackThisTile(int tilePosition, boolean isWhiteColorAttacking, Chessboard chessboard) {
+        Rook rook = new Rook(this.position, isWhiteColorAttacking);
+        Bishop bishop = new Bishop(this.position, isWhiteColorAttacking);
+        return (rook.canAttackThisTile(tilePosition, isWhiteColorAttacking, chessboard) || bishop.canAttackThisTile(tilePosition, isWhiteColorAttacking, chessboard));
     }
 }

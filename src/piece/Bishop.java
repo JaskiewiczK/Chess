@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Bishop extends Piece{
     public Bishop(int position, boolean whiteColor){
         this.position = position;
-        this.whiteColor = whiteColor;
+        this.isWhiteColor = whiteColor;
     }
 
     @Override
@@ -18,7 +18,7 @@ public class Bishop extends Piece{
         int Y = position / 8;
         int tempX = X-1;
         int tempY = Y-1;
-        if(this.whiteColor){
+        if(this.isWhiteColor){
             while(tempX>-1 && tempY>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
                 if (!isKingUnderAttack(calculatePosition(X,Y),calculatePosition(tempX,tempY), true, chessboard))
                     legalMoves.add(calculatePosition(tempX,tempY));
@@ -114,14 +114,14 @@ public class Bishop extends Piece{
     }
 
     @Override
-    public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
+    public boolean canAttackThisTile(int tilePosition, boolean isWhiteColorAttacking, Chessboard chessboard) {
 
         ArrayList<Integer> legalMoves = new ArrayList<>();
         int X = this.position % 8;
         int Y = this.position / 8;
         int tempX = X-1;
         int tempY = Y-1;
-        if(this.whiteColor){
+        if(this.isWhiteColor){
             while(tempX>-1 && tempY>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(tempX,tempY)))){
                 legalMoves.add(calculatePosition(tempX,tempY));
                 if(chessboard.isOccupiedByColor(false,calculatePosition(tempX,tempY))){
@@ -200,6 +200,6 @@ public class Bishop extends Piece{
                 ++tempY;
             }
         }
-        return  legalMoves.contains(position);
+        return  legalMoves.contains(tilePosition);
     }
 }

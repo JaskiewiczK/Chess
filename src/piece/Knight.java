@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Knight extends Piece{
     public Knight(int position, boolean whiteColor){
         this.position = position;
-        this.whiteColor = whiteColor;
+        this.isWhiteColor = whiteColor;
     }
 
     @Override
@@ -16,7 +16,7 @@ public class Knight extends Piece{
         ArrayList<Integer> legalMoves = new ArrayList<>();
         int X = position%8;
         int Y = position/8;
-        if(this.whiteColor){
+        if(this.isWhiteColor){
             if(X-2>-1 && Y-1>-1 && !(chessboard.isOccupiedByColor(true,calculatePosition(X-2,Y-1))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X-2,Y-1), true, chessboard))
                 legalMoves.add(calculatePosition(X-2,Y-1));
             if(X-2>-1 && Y+1<8 && !(chessboard.isOccupiedByColor(true,calculatePosition(X-2,Y+1))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X-2,Y+1), true, chessboard))
@@ -62,11 +62,11 @@ public class Knight extends Piece{
 
 
     @Override
-    public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
+    public boolean canAttackThisTile(int tilePosition, boolean isWhiteColorAttacking, Chessboard chessboard) {
         ArrayList<Integer> legalMoves = new ArrayList<>();
         int X = this.position % 8;
         int Y = this.position / 8;
-        if (this.whiteColor) {
+        if (this.isWhiteColor) {
             if (X - 2 > -1 && Y - 1 > -1 && !(chessboard.isOccupiedByColor(true, calculatePosition(X - 2, Y - 1))))
                 legalMoves.add(calculatePosition(X - 2, Y - 1));
             if (X - 2 > -1 && Y + 1 < 8 && !(chessboard.isOccupiedByColor(true, calculatePosition(X - 2, Y + 1))))
@@ -102,6 +102,6 @@ public class Knight extends Piece{
                 legalMoves.add(calculatePosition(X + 1, Y + 2));
 
         }
-        return legalMoves.contains(position);
+        return legalMoves.contains(tilePosition);
     }
 }

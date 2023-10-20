@@ -11,14 +11,14 @@ public class King extends Piece{
     public boolean hasAlreadyMoved;
     public King(int position, boolean whiteColor){
         this.position = position;
-        this.whiteColor = whiteColor;
+        this.isWhiteColor = whiteColor;
     }
 
     private boolean isLongCastlingLegal(Chessboard chessboard){
         if(this.hasAlreadyMoved){
             return false;
         }
-        if(this.whiteColor){
+        if(this.isWhiteColor){
             if(chessboard.whitePlayer.pieceMap.containsKey(56) && chessboard.whitePlayer.pieceMap.get(56).getType()==EnumPiece.ROOK){
                 Rook temp = (Rook) chessboard.whitePlayer.pieceMap.get(56);
                 if(temp.hasAlreadyMoved){
@@ -27,9 +27,7 @@ public class King extends Piece{
                 if(chessboard.isOccupiedByColor(true, 59) || chessboard.isOccupiedByColor(false, 59) || chessboard.isOccupiedByColor(true, 58) || chessboard.isOccupiedByColor(false, 58) || chessboard.isOccupiedByColor(true, 57) || chessboard.isOccupiedByColor(false, 57)){
                     return false;
                 }
-                if(ChessboardPanel.isKingTileUnderAttack(true, chessboard) || isKingUnderAttack(60,59,true,chessboard) || isKingUnderAttack(60,58,true,chessboard)){
-                    return false;
-                }
+                return !ChessboardPanel.isKingTileUnderAttack(true, chessboard) && !isKingUnderAttack(60, 59, true, chessboard) && !isKingUnderAttack(60, 58, true, chessboard);
             }else{
                 return false;
             }
@@ -42,21 +40,18 @@ public class King extends Piece{
                 if(chessboard.isOccupiedByColor(true, 3) || chessboard.isOccupiedByColor(false, 3) || chessboard.isOccupiedByColor(true, 2) || chessboard.isOccupiedByColor(false, 2) || chessboard.isOccupiedByColor(true, 1) || chessboard.isOccupiedByColor(false, 1)){
                     return false;
                 }
-                if(ChessboardPanel.isKingTileUnderAttack(false, chessboard) || isKingUnderAttack(4,3,false,chessboard) || isKingUnderAttack(4,2,false,chessboard)){
-                    return false;
-                }
+                return !ChessboardPanel.isKingTileUnderAttack(false, chessboard) && !isKingUnderAttack(4, 3, false, chessboard) && !isKingUnderAttack(4, 2, false, chessboard);
             }else{
                 return false;
             }
         }
-        return true;
     }
 
     private boolean isShortCastlingLegal(Chessboard chessboard){
         if(this.hasAlreadyMoved){
             return false;
         }
-        if(this.whiteColor){
+        if(this.isWhiteColor){
             if(chessboard.whitePlayer.pieceMap.containsKey(63) && chessboard.whitePlayer.pieceMap.get(63).getType()==EnumPiece.ROOK){
                 Rook temp = (Rook) chessboard.whitePlayer.pieceMap.get(63);
                 if(temp.hasAlreadyMoved){
@@ -65,9 +60,7 @@ public class King extends Piece{
                 if(chessboard.isOccupiedByColor(true, 61) || chessboard.isOccupiedByColor(false, 61) || chessboard.isOccupiedByColor(true, 62) || chessboard.isOccupiedByColor(false, 62)){
                     return false;
                 }
-                if(ChessboardPanel.isKingTileUnderAttack(true, chessboard) || isKingUnderAttack(60,61,true,chessboard) || isKingUnderAttack(60,62,true,chessboard)){
-                    return false;
-                }
+                return !ChessboardPanel.isKingTileUnderAttack(true, chessboard) && !isKingUnderAttack(60, 61, true, chessboard) && !isKingUnderAttack(60, 62, true, chessboard);
             }else{
                 return false;
             }
@@ -80,14 +73,11 @@ public class King extends Piece{
                 if(chessboard.isOccupiedByColor(true, 5) || chessboard.isOccupiedByColor(false, 5) || chessboard.isOccupiedByColor(true, 6) || chessboard.isOccupiedByColor(false, 6)){
                     return false;
                 }
-                if(ChessboardPanel.isKingTileUnderAttack(false, chessboard) || isKingUnderAttack(4,5,false,chessboard) || isKingUnderAttack(4,6,false,chessboard)){
-                    return false;
-                }
+                return !ChessboardPanel.isKingTileUnderAttack(false, chessboard) && !isKingUnderAttack(4, 5, false, chessboard) && !isKingUnderAttack(4, 6, false, chessboard);
             }else{
                 return false;
             }
         }
-        return true;
     }
 
     @Override
@@ -95,7 +85,7 @@ public class King extends Piece{
         ArrayList<Integer> legalMoves = new ArrayList<>();
         int X = position % 8;
         int Y = position / 8;
-        if(whiteColor) {
+        if(isWhiteColor) {
             if (X + 1 < 8 && Y + 1 < 8 && !(chessboard.isOccupiedByColor(true,calculatePosition(X+1,Y+1))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X+1,Y+1), true, chessboard))
                 legalMoves.add(calculatePosition(X+1,Y+1));
             if (Y + 1 < 8 && !(chessboard.isOccupiedByColor(true,calculatePosition(X,Y+1))) && !isKingUnderAttack(calculatePosition(X,Y),calculatePosition(X,Y+1), true, chessboard))
@@ -151,11 +141,11 @@ public class King extends Piece{
     }
 
     @Override
-    public boolean canAttackThisTile(int position, boolean whiteColor, Chessboard chessboard) {
+    public boolean canAttackThisTile(int tilePosition, boolean isWhiteColorAttacking, Chessboard chessboard) {
         ArrayList<Integer> legalMoves = new ArrayList<>();
         int X = this.position % 8;
         int Y = this.position / 8;
-        if(whiteColor) {
+        if(isWhiteColorAttacking) {
             if (X + 1 < 8 && Y + 1 < 8 && !(chessboard.isOccupiedByColor(true,calculatePosition(X+1,Y+1))))
                 legalMoves.add(calculatePosition(X+1,Y+1));
             if (Y + 1 < 8 && !(chessboard.isOccupiedByColor(true,calculatePosition(X,Y+1))))
@@ -192,6 +182,6 @@ public class King extends Piece{
         }
 
 
-        return legalMoves.contains(position);
+        return legalMoves.contains(tilePosition);
     }
 }
