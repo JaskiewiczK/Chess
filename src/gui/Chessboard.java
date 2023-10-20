@@ -9,41 +9,32 @@ public class Chessboard {
     public BlackPlayer blackPlayer;
     public WhitePlayer whitePlayer;
 
-    public Chessboard(){
-        blackPlayer = new BlackPlayer();
-        whitePlayer = new WhitePlayer();
+    public Chessboard(boolean setStartingPosition){
+        blackPlayer = new BlackPlayer(setStartingPosition);
+        whitePlayer = new WhitePlayer(setStartingPosition);
     }
-
-    public Chessboard(int flag){
-        blackPlayer = new BlackPlayer(flag);
-        whitePlayer = new WhitePlayer(flag);
-    }
-
-
 
     public static Chessboard deepCopyChessboard(Chessboard originalChessboard) {
-        Chessboard newChessboard = new Chessboard(1);
+        Chessboard newChessboard = new Chessboard(false);
         for (int i = 0; i < 64; i++) {
-            if (originalChessboard.blackPlayer.pieceMap.containsKey(i) && originalChessboard.blackPlayer.pieceMap.get(i) != null) {
+            if (originalChessboard.blackPlayer.pieceMap.containsKey(i)) {
                 Piece originalPiece = originalChessboard.blackPlayer.pieceMap.get(i);
                 Piece newPiece = Piece.createNewPiece(i, false, originalPiece.getType());
                 newChessboard.blackPlayer.pieceMap.put(i, newPiece);
             }
         }
         for (int i = 0; i < 64; i++) {
-            if (originalChessboard.whitePlayer.pieceMap.containsKey(i) && originalChessboard.whitePlayer.pieceMap.get(i) != null) {
+            if (originalChessboard.whitePlayer.pieceMap.containsKey(i)) {
                 Piece originalPiece = originalChessboard.whitePlayer.pieceMap.get(i);
                 Piece newPiece = Piece.createNewPiece(i, true, originalPiece.getType());
                 newChessboard.whitePlayer.pieceMap.put(i, newPiece);
             }
         }
-
         return  newChessboard;
     }
 
-
-    public static int getKingPosition(boolean whiteColor, Chessboard chessboard){
-        if(whiteColor){
+    public static int getKingPosition(boolean isKingColorWhite, Chessboard chessboard){
+        if(isKingColorWhite){
             for(int i=0; i<64; i++){
                 if(chessboard.whitePlayer.pieceMap.get(i)!=null && chessboard.whitePlayer.pieceMap.get(i).getType()== EnumPiece.KING)
                     return chessboard.whitePlayer.pieceMap.get(i).position;
@@ -59,21 +50,11 @@ public class Chessboard {
 
     public boolean isOccupiedByColor(boolean isWhite, int position) {
         if (isWhite) {
-            if (whitePlayer.pieceMap.containsKey(position)) {
-                return true;
-            } else {
-                return false;
-            }
+            return whitePlayer.pieceMap.containsKey(position);
         } else {
-            if(blackPlayer.pieceMap.containsKey(position)){
-                return true;
-            }else{
-                return false;
-            }
+            return blackPlayer.pieceMap.containsKey(position);
         }
     }
-
-
 
 }
 
